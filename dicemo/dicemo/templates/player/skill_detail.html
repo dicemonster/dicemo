@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% block content %}
+
+<div class="container">
+
+        <div id="singleskill">
+
+	<div class="row">
+		<div class="col-md-4">
+			<a class="btn btn-xs btn-info" href="/">Home</a>
+		</div>
+		<div class="col-md-4">
+			<a class="btn btn-xs btn-info" href="{% url 'skill-list' %}">Return to Skills</a>
+		</div>
+		<div class="col-md-4">
+			<a class="btn btn-xs btn-info" href="update/">Edit {{ skill }}</a>
+		</div>
+	</div>
+	<hr>
+               <h3><b>Name:</b> {{ skill }}</h2>
+				<hr><br>
+
+
+
+<div class="row">
+  <div class="col-md-8">
+        <h3>Skill Description:</h3>
+        <p>{{ skill.description|safe }}</p>
+        <h3>Skill Benefit:</h3>
+        <p>{{ skill.benefit|safe }}</p>
+
+
+</div>
+  <div class="col-md-4">
+  {% if skill.img %}
+	<a href="{{ skill.img.url }}"><img src="{% thumbnail skill.img 200x200 crop %}" class="img-thumbnail" alt="{{ skill.name }}" /></a>
+  {% else %}
+  	 <a href="#" class="thumbnail">
+      <img data-src="holder.js/100%x180" alt="Sorry but the image you are trying to reach told me to tell you that it isn't here right now.">
+    </a>
+  	{% endif %}
+  </div>
+</div>
+
+ 
+ </div> <!-- end singleskill
+
+
+</div> <!-- end container -->
+
+{% endblock %}

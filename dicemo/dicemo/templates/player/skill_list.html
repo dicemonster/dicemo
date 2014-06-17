@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+{% load thumbnail %}
+<br><br><br>
+
+    <div class="container">                                                                                                                                                               
+      <!-- Example row of columns -->                                                                                                                                                     
+
+		<p><table class="table table-hover">
+			<tbody>
+			<th>Skill Image</th>
+                        <th>Skill Name</th>
+                        <th>Category</th>
+                        <th>More Info</th>
+			{% for skill in skills %}
+				<tr>
+				{% if skill.img %}
+				<td><a href="{{ skill.img.url }}"><img src="{% thumbnail skill.img 50x50 crop %}" class="img-responsive" alt="{{ skill.name }}" /></a></td>
+				{% else %}
+				<td><span class="glyphicon glyphicon-ban-circle"></span></td>
+				{% endif %}
+				<td>{{ skill.name }}</td>
+				<td><b><a href="/skillscats/{{ skill.skill_cat.slug }}">{{ skill.skill_cat }}</a></td>
+				<td>{{ skill.descrption | safe }}</td>
+				<td><a class="btn btn-xs btn-info" href="/skills/{{ skill.slug }}">More Info</a></td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table></p>
+      
+
+		{% endblock %}
+
+
+
+      <hr>                                                                                                                                                                                
+      <footer>                                                                                                                                                                            
+        <p>&copy; DiceMo 2013</p>                                                                                                                                                        
+      </footer>                                                                                                                                                                           
+    </div> <!-- /container -->                                                                                                                                                            
+                                                                                                                                                                                          
+                                                                                                                                                                                          
+    <!-- Bootstrap core JavaScript                                                                                                                                                        
+    ================================================== -->                                                                                                                                
+    <!-- Placed at the end of the document so the pages load faster -->                                                                                                                   
+    <script src="/static/js/jquery.js"></script>                                                                                                                                     
+    <script src="/static/js/bootstrap.min.js"></script>                                                                                                                                
+  </body>                                                                                                                                                                                 
+</html>       

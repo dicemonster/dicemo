@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% block content %}
+
+<div class="container">
+
+	<div id="campaign">
+
+	<div class="row">
+<div class="btn-group">
+<div class="row">
+  <a href="/campaigns/"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Back to Campaign List</button></a>
+  <a href="update/"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-wrench"></span> Edit {{ campaign }}</button></a>
+  <div class="btn-group">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+      <span class="glyphicon glyphicon-plus"></span>
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+          <li><a href="#">Add players</a></li>
+          <li><a href="#">Add campaign update</a></li>
+          <li><a href="#">Add goal</a></li>
+    </ul>
+    </div>
+    
+  </div>
+</div>
+	</div>
+	
+		<hr>
+               <h3><b>Name:</b> {{ campaign }}</h2>
+		<hr>
+		
+		
+		
+		
+		
+
+		<div class="panel-group" id="accordion">
+
+  			<div class="panel panel-default">
+    				<div class="panel-heading">
+      					<h4 class="panel-title">
+        					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Description</a>
+      					</h4>      			
+    				</div>
+    			<div id="collapseOne" class="panel-collapse collapse in">
+      				<div class="panel-body">
+						<div class="row">
+  							<div class="col-md-8">
+        						<h3>Start Date:</h3>
+        							<p>{{ campaign.startdate }}</p>
+        						<h3>Description:</h3>
+        							<p>{{ campaign.description | safe }}</p>
+        						<h3>Game Master:</h3>
+        							<p>{{ campaign.dm }}</p>
+							</div>
+  							<div class="col-md-4">
+  							{% if campaign.campaign_img %}
+								<a href="{{ campaign.campaign_img.url }}"><img src="{% thumbnail campaign.campaign_img 300x300  %}" class="img-thumbnail" alt="{{ campaign.name }}" /></a>
+  							  	{% else %}
+								 	<a href="#" class="thumbnail">
+								  		<img data-src="holder.js/100%x180" alt="Sorry but the image you are trying to reach told me to tell you that it isn't here right now.">
+									</a>
+								{% endif %}
+  							</div>
+						</div> <!-- end row -->
+      				</div> <!-- end panel body -->
+      			</div> <!-- end collapseOne      			
+      		</div> <!-- end panel --> 
+      		
+      		<hr>
+      		
+      		<div class="panel panel-default">
+    				<div class="panel-heading">
+      					<h4 class="panel-title">
+        					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Updates / Info</a>
+      					</h4>      			
+    				</div>
+    			<div id="collapseTwo" class="panel-collapse collapse in">
+      				<div class="panel-body">
+						<div class="row">
+  							<div class="col-md-4">
+								<h3>Items</h3>
+									{% for item in campaign.item_set.all %}
+									<a href="/items/{{ item.slug }}/"><p>{{ item.name }}</p></a>
+									{% endfor %}
+  							</div>
+        					<div class="col-md-4">
+        						<h3>Goals</h3>
+									{% for goal in campaign.goal_set.all %}
+									<a href="/goals/{{ goal.slug }}/"><p>{{ goal.name }}</p></a>
+									{% endfor %}
+  							</div>
+  							<div class="col-md-4">
+								<h3>Players</h3>
+									{% for player in campaign.players.all %}
+									<a href="/players/{{ player.slug }}/"><p>{{ player.name }}</p></a>
+									{% endfor %}	
+  							</div>
+						</div> <!-- end row -->
+      				</div> <!-- end panel body -->
+      			
+      			</div> <!-- end collapseTwo
+      	
+      		
+    	</div> <!-- end panel group
+  
+  
+  
+  </div> <!-- end campaign ==>
+
+</div> <!-- end container -->
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% block content %}
+
+        <div id="singleskill">
+
+	<a class="btn btn-xs btn-info" href="/items/">Return to Items</a>
+	<hr>
+                <h3><b>Name:</b> {{ skill }}</h3>
+		<hr>
+		<a href="{{ item.img.url }}"><img src="{% thumbnail item.img 140x140 crop %}" class="img-thumbnail" alt="{{ item.name }}" /></a>
+		<br>
+		<p>
+		<table class="table">
+        		<tr>
+                		<td><strong>Description:</strong></td>
+                		<td><p>{{ item.description | safe }}</p></td>
+        		</tr>
+        		<tr>
+                		<td><strong>Benefit:</strong></td>
+                		<td>{{ item.benefit | safe }}</td>
+        		</tr>
+		</table>
+		</p>
+		<br><hr>
+		<br>
+	</div>
+
+
+
+
+        </div>
+{% endblock %}

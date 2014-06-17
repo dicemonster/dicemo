@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block extrahead %}
+
+{% endblock %}
+
+{% block content %}
+{% load thumbnail %}
+
+
+<div class="container">
+
+<hr>
+<div class="row">
+  <div class="col-md-8">
+        <p><a href="{{ homepage.hero_img.url }}"><img src="{% thumbnail homepage.hero_img 400x400 %}" class="img-thumbnail"/></a></p>
+        <hr>
+        <h1>{{ homepage.hero_copy_title }}</h1>
+        <p class="lead">{{ homepage.hero_copy|safe }}</p>
+  </div>
+
+  <div class="col-md-4">
+
+<div class="container">
+<p>
+                {% for tweet in tweets.tweets %}
+
+<div class="list-group">
+  <a href="{{ tweet.urls }}" class="list-group-item">
+        <h4 class="list-group-item-heading">{{ tweet.date }}</h4>
+        <p class="list-group-item-text">{{ tweet.status }}</p>
+        <p class="list-group-item-text"><em>{{ tweet.author }}</em></p>
+  </a>
+</div>
+
+
+
+
+                {% endfor %}
+</p>
+
+</div> <!-- end container -->
+	
+
+  </div>
+</div>
+
+<hr>
+      <!-- START THE FEATURETTES -->
+
+</div> <!-- end container -->
+
+
+	
+
+{% endblock %}

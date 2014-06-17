@@ -1,0 +1,45 @@
+from django.conf.urls.defaults import patterns, include, url
+from django.contrib import admin
+from blog.views import *
+from pages.views import *
+from player.views import *
+
+# Uncomment the next two lines to enable the admin:
+from django.contrib import admin
+admin.autodiscover()
+
+urlpatterns = patterns('',
+    url(r'^tinymce/', include('tinymce.urls')),
+
+    url(r'^search/$', include('haystack.urls')),
+
+    url(r'^$', 'pages.views.MainHomeCopy'),
+
+
+#    url(r'^players/$', 'player.views.PlayersAll'),
+#    url(r'^players/(?P<playerslug>.*)/$','player.views.SpecificPlayer'),
+
+
+    url(r'^players/$', PlayerList.as_view()),
+
+
+    url(r'^skills/$', 'player.views.SkillsAll'),
+    url(r'^skills/(?P<skillslug>.*)/$','player.views.SpecificSkill'),
+
+    url(r'^items/$', 'player.views.ItemsAll'),
+    url(r'^items/(?P<itemslug>.*)/$','player.views.SpecificItem'),
+
+    url(r'', include('social_auth.urls')),
+
+    url(r'^register/$', 'gamer.views.GamerRegistration'),
+    url(r'^profile/$', 'gamer.views.Profile'),
+    url(r'^login/$', 'gamer.views.LoginRequest'),
+    url(r'^logout/$', 'gamer.views.LogoutRequest'),
+    url(r'^resetpassword/passwordsent/$', 'django.contrib.auth.views.password_reset_done'),
+    url(r'^resetpassword/$', 'django.contrib.auth.views.password_reset'),
+    url(r'^reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', 'django.contrib.auth.views.password_reset_confirm'),
+    url(r'^reset/done/$', 'django.contrib.auth.views.password_reset_complete'),
+
+
+    url(r'^admin/', include(admin.site.urls)),
+)

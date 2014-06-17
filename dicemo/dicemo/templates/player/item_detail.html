@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% block content %}
+
+<div class="container">
+
+        <div id="singleitem">
+
+	<div class="row">
+		<div class="col-md-4">
+			<a class="btn btn-xs btn-info" href="/">Home</a>
+		</div>
+		<div class="col-md-4">
+			<a class="btn btn-xs btn-info" href="{% url 'item-list' %}">Return to Items</a>
+		</div>
+		<div class="col-md-4">
+			<a class="btn btn-xs btn-info" href="update/">Edit {{ item }}</a>
+		</div>
+	</div>
+	<hr>
+               <h3><b>Name:</b> {{ item }}</h2>
+				<hr><br>
+
+
+
+<div class="row">
+  <div class="col-md-8">
+        <h3>Item Description:</h3>
+        <p>{{ item.description|safe }}</p>
+        <h3>Item Benefit:</h3>
+        <p>{{ item.benefit|safe }}</p>
+
+
+</div>
+  <div class="col-md-4">
+  {% if item.img %}
+	<a href="{{ item.img.url }}"><img src="{% thumbnail item.img 200x200 crop %}" class="img-thumbnail" alt="{{ item.name }}" /></a>
+  {% else %}
+  	 <a href="#" class="thumbnail">
+      <img data-src="holder.js/100%x180" alt="Sorry but the image you are trying to reach told me to tell you that it isn't here right now.">
+    </a>
+  	{% endif %}
+  </div>
+</div>
+
+ 
+ </div> <!-- end singleitem
+
+
+</div> <!-- end container -->
+
+{% endblock %}

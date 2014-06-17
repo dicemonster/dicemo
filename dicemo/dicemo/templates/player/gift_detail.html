@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% block content %}
+
+<div class="container">
+
+        <div id="singlegift">
+
+	<div class="row">
+		<div class="col-md-4">
+			<a class="btn btn-xs btn-info" href="/">Home</a>
+		</div>
+		<div class="col-md-4">
+			<a class="btn btn-xs btn-info" href="{% url 'gift-list' %}">Return to Gifts</a>
+		</div>
+		<div class="col-md-4">
+			<a class="btn btn-xs btn-info" href="update/">Edit {{ gift }}</a>
+		</div>
+	</div>
+	<hr>
+               <h3><b>Name:</b> {{ gift }}</h2>
+				<hr><br>
+
+
+
+<div class="row">
+  <div class="col-md-8">
+        <h3>Gift Description:</h3>
+        <p>{{ gift.description|safe }}</p>
+        <h3>Gift Benefit:</h3>
+        <p>{{ gift.benefit|safe }}</p>
+
+
+</div>
+  <div class="col-md-4">
+  {% if gift.img %}
+	<a href="{{ gift.img.url }}"><img src="{% thumbnail gift.img 200x200 crop %}" class="img-thumbnail" alt="{{ gift.name }}" /></a>
+    {% else %}
+  	 <a href="#" class="thumbnail">
+      <img data-src="holder.js/100%x180" alt="Sorry but the image you are trying to reach told me to tell you that it isn't here right now.">
+    </a>
+  	{% endif %}
+  </div>
+</div>
+
+ 
+ </div> <!-- end singlegift
+
+
+</div> <!-- end container -->
+
+{% endblock %}

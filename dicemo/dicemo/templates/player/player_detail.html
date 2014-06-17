@@ -1,0 +1,235 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% block content %}
+
+<div class="container">
+
+        <div id="singleplayer">
+
+<br><br>
+
+<div class="btn-group">
+<div class="row">
+  <a href="/players/"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Back to Player List</button></a>
+  <a href="update/"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-wrench"></span> Edit {{ player }}</button></a>
+  <div class="btn-group">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+      <span class="glyphicon glyphicon-plus"></span>
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+          <li><a href="addon/">Add Skills, Items, Gifts, Faults</a></li>
+          <li><a href="#">Add Update</a></li>
+          <li><a href="altermaxstats">Alter Maximum Stats</a></li>
+    </ul>
+    </div>
+    <div class="btn-group">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+      <span class="glyphicon glyphicon-warning-sign"></span>
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+          <li><a href="altercurstats/">Adjust Current Stats</a></li>
+          <li><a href="#">Adjust Money</a></li>
+    </ul>
+    </div>
+  </div>
+</div>
+
+
+		
+		
+	<hr>
+               <h3><b>Name:</b> {{ player }}</h3>
+		<h3><b>Status:</b> 
+		{% if  player.status  == 'A'  %}Active{% elif  player.status  == 'B' %}Retired{% elif  player.status  == 'C' %}Dead{% else %}Frozen in carbonite{% endif %}
+	    </h3>
+<h3>Gamer: <b>{{ player.gamer.name }}</h3>
+	
+
+<div class="panel-group" id="accordion">
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Description and Backstory</a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in">
+      <div class="panel-body">
+
+<div class="row">
+  <div class="col-md-8">
+        <h3>Description:</h3>
+        <p>{{ player.description|safe }}</p>
+        <h3>Backstory:</h3>
+        <p>{{ player.story|safe }}</p>
+
+
+  </div>
+  <div class="col-md-4">
+  {% if player.img %}
+	<a href="{{ player.img.url }}"><img src="{% thumbnail player.img 200x200 crop %}" class="img-thumbnail" alt="{{ player.name }}" /></a>
+  {% else %}
+  	 <a href="#" class="thumbnail">
+      <img data-src="holder.js/100%x180" alt="Sorry but the image you are trying to reach told me to tell you that it isn't here right now.">
+    </a>
+  	{% endif %}
+  </div>
+</div>
+
+      </div>
+    </div>
+  </div>
+
+ <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Player Stats</a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse">
+      <div class="panel-body">
+                <br>
+		<h3>Stats</h3>
+                <p>
+                <table class="table">
+                        <th>Stat</th><th>Current / Max</th>
+
+                        <tr>
+                                <td><strong>Hit points:</strong></td>
+                                <td>{{ player.hp_cur }} / {{ player.hp_max }}</td>
+                        </tr>
+                        <tr>
+                                <td><strong>Strength:</strong></td>
+                                <td>{{ player.str_cur }} / {{ player.str_max }}</td>
+                        </tr>
+                        <tr>
+                                <td><strong>Agility:</strong></td>
+                                <td>{{ player.ag_cur }} / {{ player.ag_max }}</td>
+                        </tr>
+                        <tr>
+                                <td><strong>Constitution:</strong></td>
+                                <td>{{ player.con_cur }} / {{ player.con_max }}</td>
+                        </tr>
+                        <tr>
+                                <td><strong>Intelligence:</strong></td>
+                                <td>{{ player.int_cur }} / {{ player.int_max }}</td>
+                        </tr>
+                        <tr>
+                                <td><strong>Spitir:</strong></td>
+                                <td>{{ player.spi_cur }} / {{ player.spi_max }}</td>
+                        </tr>
+                        <tr>
+                                <td><strong>Senses:</strong></td>
+                                <td>{{ player.sen_cur }} / {{ player.sen_max }}</td>
+                        </tr>
+                        <tr>
+                                <td><strong>Speed:</strong></td>
+                                <td>{{ player.speed }}</td>
+                        </tr>
+                        <tr>
+                                <td><strong>Money:</strong></td>
+                                <td>$ {{ player.money }}</td>
+                        </tr>
+                        <tr>
+                                <td><strong>Skill Points:</strong></td>
+                                <td>{{ player.skill_points }}</td>
+                        </tr>
+                </table>
+                </p>
+                <br><hr>
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Gifts</a><span class="badge pull-right">{{ player.gifts.count }}</span>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse">
+      <div class="panel-body">
+      <div class="container">
+        <h3>Gifts</h3>
+
+        <table class="table">
+                        <th>Name</th><th><span class="glyphicon glyphicon-picture"></span></th><th>Benefit</th>
+        {% for gift in player.gifts.all  %}
+        <tr>
+                <td><a href="/gifts/{{ gift.slug }}">{{ gift.name }}</a></td>
+                <td><img src="{% thumbnail gift.img 50x50 crop %}" class="img-thumbnail" alt="{{ gift.name }}" /></td>
+                <td>{{ gift.benefit | safe }}</td>                                                                                                                                   
+        </tr>                                                                                                                                                                             
+        {% endfor %}                                                                                                                                                                      
+        </table>                                                                                                                                                                          
+        </div> <!-- end container -->                                                                                                                                                     
+      </div>                                                                                                                                                                              
+    </div>                                                                                                                                                                                
+  </div> 
+
+
+
+
+
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">Skills</a><span class="badge pull-right">{{ player.skills.count }}</span>
+      </h4>
+    </div>
+    <div id="collapseFour" class="panel-collapse collapse">
+      <div class="panel-body">
+      <div class="container">
+	<h3>Skills</h3>
+
+	<table class="table">
+                        <th>Name</th><th>Thumb</th><th>Specific</th>
+	{% for skill in player.skills.all %}
+	<tr>
+		<td><a href="/skills/{{ skill.slug }}">{{ skill }}</a></td>
+		<td><img src="{% thumbnail skill.img 50x50 crop %}" class="img-thumbnail" alt="{{ skill.name }}" /></td>
+		<td>{{ skill.description | safe | truncatewords_html:10 }}</td>
+	</tr>
+	{% endfor %}
+	</table>
+	</div> <!-- end container -->
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">Items</a><span class="badge pull-right">{{ player.items.count }}</span>
+      </h4>
+    </div>
+    <div id="collapseFive" class="panel-collapse collapse">
+      <div class="panel-body">
+        <table class="table">
+                        <th>Name</th><th>Thumb</th><th>Specific</th>
+        {% for item in player.items.all %}
+        <tr>
+                <td><a href="/items/{{ item.slug }}">{{ item.name }}</a></td>
+                <td><img src="{% thumbnail item.img 50x50 crop %}" class="img-thumbnail" alt="{{ item.name }}" /></td>
+                <td>{{ item.description | safe | truncatewords_html:10 }}</td>
+        </tr>
+        {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+</div> <!-- end master container -->
+
+{% endblock %}

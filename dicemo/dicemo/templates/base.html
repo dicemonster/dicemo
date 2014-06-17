@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A site for us to manage our RPG campaigns">
+    <meta name="author" content="Wade Neuwirth">
+    <meta name="google-site-verification" content="SNKR-hzEI-DP_-GpuwAhD5hzj-liulfmv_FMZ57VrLw" />
+<!--
+    <link rel="shortcut icon" href="../../assets/ico/favicon.png">
+-->
+    <title>DICEMOnster: Version 3, BLARRRRGH!</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="starter-template.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="/static/js/html5shiv.js"></script>
+      <script src="/static/js/respond.min.js"></script>
+    <![endif]-->
+
+{% block extrahead %}
+{% endblock %}
+
+  </head>
+
+  <body>
+
+
+  <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-home"></span></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+                <li><a href="/players/">Players</a></li>
+                <li><a href="/campaigns/">Campaigns</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-eye-open"></span><b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="/skills/">Skills</a></li>
+                <li><a href="/items/">Items</a></li>
+                <li><a href="/gifts/">Gifts</a></li>
+                <li><a href="/faults/">Faults</a></li>
+              </ul>
+            </li>
+	<li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-plus"></span><b class="caret"></b></a>
+              <ul class="dropdown-menu">
+				<li><a href="/add-skill/"><span class="glyphicon glyphicon-plus"></span> Skills</a></li>
+				<li><a href="/add-item/"><span class="glyphicon glyphicon-plus"></span> Item</a></li>
+				<li><a href="/add-gift/"><span class="glyphicon glyphicon-plus"></span> Gift</a></li>
+				<li><a href="/add-fault/"><span class="glyphicon glyphicon-plus"></span> Fault</a></li>
+				<li><a href="/add-player/"><span class="glyphicon glyphicon-plus"></span> Player</a></li>				
+				<li><a href="/add-campaign/"><span class="glyphicon glyphicon-plus"></span> Campaign</a></li>
+              </ul>
+            <li><a href="/">Rules</a></li>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            {% if user.is_authenticated %}                                                                                              
+                <li><a href="/logout/">Logout</a></li>                                                                                  
+                <li><a href="/profile/">Profile</a></li>                                                                                
+           {% else %}                                                                                                                   
+                <li><a href="/login/">Login</a></li>                                                                                    
+                <li><a href="/register/">Register</a></li>                                                                              
+           {% endif %} 
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+
+
+
+
+
+<br><br><br>
+
+    <div class="container">
+
+      <div class="starter-template">
+
+    	<div id="pageContainer">
+        	{% block content %}
+        
+		{% endblock %}
+    	</div>
+
+      </div>
+
+    </div><!-- /.container -->
+<hr>
+
+<div class-"container">
+<div class="panel panel-default">
+  <div class="panel-body">
+	<p class="pull-right"><a href="#">Back to top</a></p>
+	<br>
+  </div>
+  <div class="panel-footer">
+	<p class="pull-left">&copy; 2013 DICEMONSTER. Fuck yeah!  All Rights Reserved.</p>
+	<br>
+  </div>
+</div>
+
+<hr>
+</div> <!-- /.container -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+  </body>
+</html>
+

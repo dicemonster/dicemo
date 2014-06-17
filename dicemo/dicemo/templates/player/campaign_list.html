@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+{% load thumbnail %}
+<br><br><br>
+
+    <div class="container">                                                                                                                                                               
+      <!-- Example row of columns -->                                                                                                                                                     
+
+		<p><table class="table table-hover">
+			<tbody>
+			<th>Campaign Image</th>
+                        <th>Campaign Name</th>
+			<th>Description</th>
+                        <th>More Info</th>
+			{% for campaign in campaigns %}
+				<tr>
+				{% if campaign.campaign_img %}
+				<td><a href="{{ campaign.campaign_img.url }}"><img src="{% thumbnail campaign.campaign_img 44x44 crop %}" class="img-responsive" alt="{{ campaign.name }}" /></a></td>
+				{% else %}
+				<td>N/A</td>
+				{% endif %}
+                                <td>{{ campaign.name  }}</td>
+				<td>{{ campaign.description |truncatewords:40|safe }}
+				<td><a class="btn btn-xs btn-info" href="/campaigns/{{ campaign.slug }}">More Info...</a></td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table></p>
+      
+
+		{% endblock %}
+
+
+
+      <hr>                                                                                                                                                                                
+      <footer>                                                                                                                                                                            
+        <p>&copy; DiceMo 2013</p>                                                                                                                                                        
+      </footer>                                                                                                                                                                           
+    </div> <!-- /container -->                                                                                                                                                            
+                                                                                                                                                                                          
+                                                                                                                                                                                          
+    <!-- Bootstrap core JavaScript                                                                                                                                                        
+    ================================================== -->                                                                                                                                
+    <!-- Placed at the end of the document so the pages load faster -->                                                                                                                   
+    <script src="/static/js/jquery.js"></script>                                                                                                                                     
+    <script src="/static/js/bootstrap.min.js"></script>                                                                                                                                
+  </body>                                                                                                                                                                                 
+</html>       

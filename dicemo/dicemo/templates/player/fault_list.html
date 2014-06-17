@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+{% load thumbnail %}
+<br><br><br>
+
+    <div class="container">                                                                                                                                                               
+      <!-- Example row of columns -->                                                                                                                                                     
+
+		<p><table class="table table-hover">
+			<tbody>
+			<th>Fault Image</th>
+                        <th>Fault Name</th>
+                        <th>More Info</th>
+			{% for fault in faults %}
+				<tr>
+				{% if fault.img %}
+				<td><a href="{{ fault.img.url }}"><img src="{% thumbnail fault.img 50x50 crop %}" class="img-responsive" alt="{{ fault.name }}" /></a></td>
+				{% else %}
+				<td><span class="glyphicon glyphicon-ban-circle"></span></td>
+				{% endif %}
+				<td>{{ fault.name }}</td>
+				<td><a class="btn btn-xs btn-info" href="/faults/{{ fault.slug }}">More Info</a></td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table></p>
+      
+
+		{% endblock %}
+
+
+
+      <hr>                                                                                                                                                                                
+      <footer>                                                                                                                                                                            
+        <p>&copy; DiceMo 2013</p>                                                                                                                                                        
+      </footer>                                                                                                                                                                           
+    </div> <!-- /container -->                                                                                                                                                            
+                                                                                                                                                                                          
+                                                                                                                                                                                          
+    <!-- Bootstrap core JavaScript                                                                                                                                                        
+    ================================================== -->                                                                                                                                
+    <!-- Placed at the end of the document so the pages load faster -->                                                                                                                   
+    <script src="/static/js/jquery.js"></script>                                                                                                                                     
+    <script src="/static/js/bootstrap.min.js"></script>                                                                                                                                
+  </body>                                                                                                                                                                                 
+</html>       

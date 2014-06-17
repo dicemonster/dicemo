@@ -1,0 +1,10 @@
+{% with obj=result.object %}</pre>
+<div class="well well-sm">
+<a href="{{ obj.name }}"> {{ obj.name }}</a>
+<div style="padding: 8px 15px;">
+Description: {{ obj.description | safe }}
+ 
+</div>
+</div>
+<br>
+{% endwith %}

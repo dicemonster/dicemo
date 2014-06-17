@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load crispy_forms_tags %}
+{% block extrahead %}
+
+<script type="text/javascript" src="{{ MEDIA_URL }}/js/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}/js/tiny_mce/textareas.js"></script>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+{% if form.is_multipart %}
+    <form enctype="multipart/form-data" method="post">
+{% else %}
+    <form method="post">
+{% endif %}
+
+	{% csrf_token %}
+		{{ form | crispy }}
+		<input class="btn btn-primary" type="submit" value="Skill Update" />
+</form>
+	
+	
+	
+	
+
+</div> <!-- end container -->
+
+{% endblock %}
